@@ -75,11 +75,14 @@ public class App {
         for (int i = 0; i < size; ++i) {
             nums.add(rand.nextDouble());
         }
-        var largest = KLargest.findKLargest(nums, k, (x, y) -> x > y);
-        System.out.printf("Them %1.4f", largest.stream().reduce((x, y) -> x + y));
+        var largest = KLargest.findKLargest(nums, k, (x, y) -> x < y);
+        System.out.printf("Them %1.4f\n", largest.stream().reduce((x, y) -> x + y).get());
         Collections.sort(nums, (x, y) -> -Double.compare(x, y));
         var realLargest = new HashSet<Double>(nums.subList(0, k));
-        System.out.printf("True %1.4f", realLargest.stream().reduce((x, y) -> x + y));
+        System.out.printf("True %1.4f\n", realLargest.stream().reduce((x, y) -> x + y).get());
+        if (largest.size() != realLargest.size()) {
+            System.out.println("Sizes don't match: " + largest.size() + " " + realLargest.size());
+        }
         if (!largest.equals(realLargest)) {
             System.out.println("The largest elements don't match expectation.");
         }
