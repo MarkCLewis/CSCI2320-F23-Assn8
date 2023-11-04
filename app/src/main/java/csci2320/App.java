@@ -63,6 +63,7 @@ public class App {
     }
 
     public static void heap(Random rand, int size) {
+        System.out.println("Heap test with " + size);
         testHeap(size, () -> rand.nextDouble(), (x, y) -> x > y, (x, y) -> -Double.compare(x, y));
         testHeap(size, () -> rand.nextDouble(), (x, y) -> x < y, (x, y) -> Double.compare(x, y));
         testHeap(size, () -> randomString(rand, 8), (x, y) -> x.compareTo(y) < 0, (x, y) -> x.compareTo(y));
@@ -75,8 +76,10 @@ public class App {
             nums.add(rand.nextDouble());
         }
         var largest = KLargest.findKLargest(nums, k, (x, y) -> x > y);
+        System.out.printf("Them %1.4f", largest.stream().reduce((x, y) -> x + y));
         Collections.sort(nums, (x, y) -> -Double.compare(x, y));
         var realLargest = new HashSet<Double>(nums.subList(0, k));
+        System.out.printf("True %1.4f", realLargest.stream().reduce((x, y) -> x + y));
         if (!largest.equals(realLargest)) {
             System.out.println("The largest elements don't match expectation.");
         }
