@@ -37,5 +37,11 @@ public class BinaryHeap<E> implements PriorityQueue<E> {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
   }
+
+  @Override
+  public int size() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'size'");
+  }
   
 }

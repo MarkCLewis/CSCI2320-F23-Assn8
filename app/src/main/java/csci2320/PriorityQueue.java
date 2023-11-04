@@ -21,4 +21,9 @@ public interface PriorityQueue<E> {
    * Tells if the priority queue is empty.
    */
   boolean isEmpty();
+
+  /**
+   * Return the number of element in the priority queue.
+   */
+  int size();
 }
