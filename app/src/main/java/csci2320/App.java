@@ -16,16 +16,23 @@ import java.util.function.Supplier;
 public class App {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            long seed = sc.nextLong();
-            Random rand = new Random(seed);
-            int size = sc.nextInt();
-            String type = sc.next();
-            switch(type) {
+            String testType = sc.next();
+            if (testType.equals("speed")) {
+                speed(1000000);
+                return;
+            }
+            Random rand = new Random(sc.nextLong());
+            int size1 = sc.nextInt();
+            int size2 = sc.nextInt();
+            switch(testType) {
                 case "heap":
-                    heap(rand, size);
+                    heap(rand, size1);
+                    heap(rand, size2);
                     break;
                 case "klargest":
-                    kLargest(rand, size, sc.nextInt());
+                    kLargest(rand, size1, sc.nextInt());
+                    kLargest(rand, size2, sc.nextInt());
+                    kLargest(rand, size2 * 10, sc.nextInt());
                     break;
             }
         }
@@ -87,5 +94,15 @@ public class App {
             System.out.println("The largest elements don't match expectation.");
         }
         System.out.println("K-largest test completed.");
+    }
+
+    static void speed(int size) {
+        var start = System.nanoTime();
+        Random rand = new Random(48283);
+
+        heap(rand, size);
+        System.out.println("Basic time: " + (System.nanoTime() - start)*1e-9);
+        kLargest(rand, size, size / 10);
+        System.out.println("Final time: " + (System.nanoTime() - start)*1e-9);
     }
 }
